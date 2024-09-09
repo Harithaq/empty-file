@@ -307,25 +307,13 @@ app.delete(
   authenticateToken,
   async (request, response) => {
     const {tweetId} = request.params
-    const {userId} = request
-
-    const getTheTweetQuery = `
-    select * from tweet where user_id = '${userId}'
-    and tweet_id = '${tweetId}'`
-    const tweet = await db.get(getTheTweetQuery)
-
-    if (tweet === undefined) {
-      response.status(401)
-      response.send('Invalid Request')
-    } else {
-      cons
-      t deleteTweetQuery = `
+    
+      const deleteTweetQuery = `
       DELETE FROM tweet WHERE tweet_id = '${tweetId}'`
 
       await db.run(deleteTweetQuery)
       response.send('Tweet Removed')
-    }
-  },
+    },
 )
 
 
